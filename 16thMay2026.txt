@@ -1,1 +1,59 @@
-Installation of Mysql and setup 
+show databases;
+
+create database vit;
+create database vit1;
+
+show databases;
+
+drop database vit1;
+
+use vit;
+
+-- Table 1
+create table cse(
+    sid int8,
+    sname varchar(50),
+    smarks int1
+);
+
+insert into cse values(100,'dipanshu',90);
+insert into cse values(101,'aman',91);
+insert into cse values(102,'rohan',33);
+insert into cse values(103,'uday',19);
+insert into cse values(104,'rahul',76);
+
+select * from cse;
+
+
+-- Table 2
+create table aiml(
+    sid int8,
+    sname varchar(50),
+    smarks int1
+);
+
+insert into aiml values(201,'arjun',88);
+insert into aiml values(202,'karan',79);
+insert into aiml values(203,'vivek',95);
+insert into aiml values(204,'neha',67);
+insert into aiml values(205,'riya',84);
+
+select * from aiml;
+
+
+-- Table 3
+create table cyber(
+    sid int8,
+    sname varchar(50),
+    smarks int1
+);
+
+insert into cyber values(301,'mohit',72);
+insert into cyber values(302,'sneha',81);
+insert into cyber values(303,'akash',69);
+insert into cyber values(304,'tina',93);
+insert into cyber values(305,'yash',58);
+
+select * from cyber;
+drop database vit;
+
