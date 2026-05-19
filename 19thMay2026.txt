@@ -1,0 +1,334 @@
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+
+use vitcampus;
+
+show tables from vitcampus;
+
+select * from worker;
+
+select first_name,department,salary from worker
+where department='admin' or salary >= 100000;
+
+select * from worker;
+
+select worker_id,first_name,department,salary from worker
+where worker_id not in (1,6,7);
+
+select * from worker 
+where salary not between 110000 and 300000;
+
+SELECT * FROM worker
+WHERE salary BETWEEN 100000 AND 500000
+AND department NOT IN ('hr','admin');
+
+SELECT * FROM worker WHERE first_name LIKE '_i__a_';
+
+
+-------------------------------------------------------
+##like operator ##
+-- Create Database
+CREATE DATABASE college;
+
+-- Use Database
+USE college;
+
+-- Create Table
+CREATE TABLE students (
+    id INT,
+    name VARCHAR(50),
+    city VARCHAR(50)
+);
+
+-- Insert Data
+INSERT INTO students VALUES (101, 'Rahul', 'Delhi');
+INSERT INTO students VALUES (102, 'Rohan', 'Mumbai');
+INSERT INTO students VALUES (103, 'Ritika', 'Delhi');
+INSERT INTO students VALUES (104, 'Raj', 'Pune');
+INSERT INTO students VALUES (105, 'Ramesh', 'Delhi');
+
+-- Display Table
+SELECT * FROM students;
+
+-- LIKE Operator Examples
+
+-- Names starting with 'R'
+SELECT * FROM students
+WHERE name LIKE 'R%';
+
+-- Names ending with 'l'
+SELECT * FROM students
+WHERE name LIKE '%l';
+
+-- Names containing 'it'
+SELECT * FROM students
+WHERE name LIKE '%it%';
+
+-- Names with exactly 5 characters
+SELECT * FROM students
+WHERE name LIKE '_____';
+
+-- City starting with 'D'
+SELECT * FROM students
+WHERE city LIKE 'D%';
+
+-- Second letter is 'a'
+SELECT * FROM students
+WHERE name LIKE '_a%';
+
+------------------------------------------------------------------
+#min,max##
+-- MIN() Function
+-- Find minimum id
+SELECT MIN(id) AS Minimum_ID
+FROM students;
+
+-- MAX() Function
+-- Find maximum id
+SELECT MAX(id) AS Maximum_ID
+FROM students;
+
+-- Minimum name alphabetically
+SELECT MIN(name) AS First_Name
+FROM students;
+
+-- Maximum name alphabetically
+SELECT MAX(name) AS Last_Name
+FROM students;
+
+-- Minimum city alphabetically
+SELECT MIN(city) AS First_City
+FROM students;
+
+-- Maximum city alphabetically
+SELECT MAX(city) AS Last_City
+FROM students;
+
+
+-----------------------------------------------------------------
+###Union####
+USE college;
+
+-- Create second table
+CREATE TABLE staff (
+    id INT,
+    name VARCHAR(50),
+    city VARCHAR(50)
+);
+
+-- Insert data into staff table
+INSERT INTO staff VALUES (201, 'Aman', 'Delhi');
+INSERT INTO staff VALUES (202, 'Rohan', 'Mumbai');
+INSERT INTO staff VALUES (203, 'Raj', 'Pune');
+
+-- Display both tables
+SELECT * FROM students;
+SELECT * FROM staff;
+
+-- UNION Operator
+-- Combines records from both tables and removes duplicates
+
+SELECT name, city
+FROM students
+
+UNION
+
+SELECT name, city
+FROM staff;
+
+-- UNION ALL Operator
+-- Combines records and keeps duplicates
+
+SELECT name, city
+FROM students
+
+UNION ALL
+
+SELECT name, city
+FROM staff;
+
+----------------------------------------------------------------------------
+#Distinct
+-- Using same database
+USE college;
+
+-- Display all records
+SELECT * FROM students;
+
+-- DISTINCT Keyword
+-- Shows unique city names only
+
+SELECT DISTINCT city
+FROM students;
+
+-- DISTINCT on names
+SELECT DISTINCT name
+FROM students;
+
+-- DISTINCT on multiple columns
+SELECT DISTINCT city, name
+FROM students;
+
+------------------------------------------------------------------------------
+#Case 
+-- Using same database
+USE college;
+
+-- Display table
+SELECT * FROM students;
+
+-- CASE Statement Example
+-- Categorize students based on id
+
+SELECT 
+    id,
+    name,
+    city,
+    CASE
+        WHEN id < 103 THEN 'Old Student'
+        WHEN id = 103 THEN 'Middle Student'
+        ELSE 'New Student'
+    END AS Student_Category
+FROM students;
+
+-- CASE Statement with city
+
+SELECT
+    name,
+    city,
+    CASE
+        WHEN city = 'Delhi' THEN 'North India'
+        WHEN city = 'Mumbai' THEN 'West India'
+        ELSE 'Other City'
+    END AS Region
+FROM students;
+
+
+-------------------------------------------------------------------------------
+#Sir Example#
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+
+select * from worker;
+
+SELECT * FROM worker WHERE first_name LIKE '_i__a_';
+
+select * from worker;
+
+select (salary) from worker where department='admin';
+
+SELECT salary FROM worker
+UNION ALL
+SELECT salary FROM worker;
+
+
+select * from worker;
+
+select worker_id as RollNumber from worker;
+
+select distinct(department) from worker;
+
+SELECT worker_id, first_name,
+CASE
+    WHEN salary > 300000 THEN 'Rich people'
+    WHEN salary >= 100000 and salary <299999 THEN 'Middle'
+    ELSE 'Poor'
+END 
+AS Status
+FROM worker
+
+------------------------------------------------------------------------
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+
+select * from worker;
+
+SELECT * FROM worker WHERE first_name LIKE '_i__a_';
+
+select * from worker;
+
+select (salary) from worker where department='admin';
+
+SELECT salary FROM worker
+UNION ALL
+SELECT salary FROM worker;
+
+
+select * from worker;
+
+select worker_id as RollNumber from worker;
+
+select distinct(department) from worker;
+
+SELECT worker_id, first_name,
+CASE
+    WHEN salary > 300000 THEN 'Rich people'
+    WHEN salary >= 100000 and salary <299999 THEN 'Middle'
+    ELSE 'Poor'
+END 
+AS Status
+FROM worker;
+
+select min(salary) from worker where department='admin';
+select max(salary) from worker where department='admin';
+
+create view minSalaryAdmin as select min(salary) from worker where department='admin';
+
+create view mAxSalaryAdmin as select max(salary) from worker where department='admin';
+
+
+select * from maxsalaryadmin;
