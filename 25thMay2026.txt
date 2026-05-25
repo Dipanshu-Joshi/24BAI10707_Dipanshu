@@ -1,0 +1,41 @@
+use vit 
+switched to db vit
+db 
+vit
+db.createCollection("Student")
+{ ok: 1 }
+show collections
+Student
+db.Student.drop()
+true
+show collections
+db.createCollection("Employee")
+{ ok: 1 }
+db.dropDatabase("emplyee")
+{ ok: 1, dropped: 'vit' }
+show collections
+db.createCollection("Employee")
+{ ok: 1 }
+show collections
+Employee
+db.Employee.insert({name:"Dipanshu",department:"CSE"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a14583ec008bb5c48336d2d')
+  }
+}
+db.Employee.insert({name:"Uday",department:"CSE"})
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a145858c008bb5c48336d2e')
+  }
+}
+db.Employee.find()
+{
+  _id: ObjectId('6a14583ec008bb5c48336d2d'),
+  name: 'Dipanshu',
+  department: 'CSE'
+}
