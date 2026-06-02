@@ -1,0 +1,208 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class CRUD_Test {
+
+    public static void main(String[] args) {
+
+        CRUD_Test obj = new CRUD_Test();
+
+        // CREATE
+        obj.createData("201", "Arun", "arun@gmail.com");
+
+        // READ
+        obj.readData("201");
+
+        // UPDATE
+        obj.updateData("201", "Arun Kumar", "arunkumar@gmail.com");
+
+        // READ AFTER UPDATE
+        obj.readData("201");
+
+        // DELETE
+        obj.deleteData("201");
+    }
+
+    // CREATE
+    public void createData(String sl_no, String name, String email) {
+
+        DB_Connection db = new DB_Connection();
+        Connection con = db.get_connection();
+
+        try {
+
+            String query =
+                    "INSERT INTO user(sl_no,name,email) VALUES(?,?,?)";
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, sl_no);
+            ps.setString(2, name);
+            ps.setString(3, email);
+
+            int count = ps.executeUpdate();
+
+            System.out.println(count + " Record Inserted");
+
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // READ
+    public void readData(String sl_no) {
+
+        DB_Connection db = new DB_Connection();
+        Connection con = db.get_connection();
+
+        try {
+
+            String query =
+                    "SELECT * FROM user WHERE sl_no=?";
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, sl_no);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                System.out.println("Sl No : "
+                        + rs.getString("sl_no"));
+
+                System.out.println("Name  : "
+                        + rs.getString("name"));
+
+                System.out.println("Email : "
+                        + rs.getString("email"));
+
+                System.out.println("---------------------");
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // UPDATE
+    public void updateData(String sl_no,
+                           String newName,
+                           String newEmail) {
+
+        DB_Connection db = new DB_Connection();
+        Connection con = db.get_connection();
+
+        try {
+
+            String query =
+                    "UPDATE user SET name=?, email=? WHERE sl_no=?";
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, newName);
+            ps.setString(2, newEmail);
+            ps.setString(3, sl_no);
+
+            int count = ps.executeUpdate();
+
+            System.out.println(count + " Record Updated");
+
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // DELETE
+    public void deleteData(String sl_no) {
+
+        DB_Connection db = new DB_Connection();
+        Connection con = db.get_connection();
+
+        try {
+
+            String query =
+                    "DELETE FROM user WHERE sl_no=?";
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, sl_no);
+
+            int count = ps.executeUpdate();
+
+            System.out.println(count + " Record Deleted");
+
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+-----------------------------------------------------------------------------
+public void truncate_data() {
+	    DB_Connection obj_DB_Connection = new DB_Connection();
+	    Connection connection = obj_DB_Connection.get_connection();
+	    PreparedStatement ps = null;
+
+	    try {
+	        String query = "truncate table student";
+	        ps = connection.prepareStatement(query);
+
+	        System.out.println(ps);
+
+	        ps.executeUpdate();
+	        System.out.println("All records deleted successfully.");
+
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    }
+	}
+    ------------------------------------------------
+    public void alter_table() {
+	    DB_Connection obj_DB_Connection = new DB_Connection();
+	    Connection connection = obj_DB_Connection.get_connection();
+	    PreparedStatement ps = null;
+
+	    try {
+	        String query = "alter table student ADD address VARCHAR(20)";
+	        ps = connection.prepareStatement(query);
+
+	        System.out.println(ps);
+
+	        ps.executeUpdate();
+	        System.out.println("Column added successfully.");
+
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    }
+	}
+    ----------------------------------------------------------------------
+    import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
+
+public class MongoDBConnection {
+    public static void main(String[] args) {
+        String connectionString = "mongodb://localhost:27017";
+
+        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            MongoDatabase database = mongoClient.getDatabase("testdb");
+            System.out.println("Connected successfully to MongoDB!");
+        }
+    }
+}
+----------------------
+#############Output################
