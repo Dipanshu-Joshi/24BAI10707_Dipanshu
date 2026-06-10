@@ -1,0 +1,124 @@
+rs.initiate({
+  _id: "myReplSet",
+  members: [
+    { _id: 0, host: "localhost:27017" },
+    { _id: 1, host: "localhost:27018" },
+    { _id: 2, host: "localhost:27019" }
+  ]
+})
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1781097890, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1781097890, i: 1 })
+}
+rs.status()
+{
+      optimeWritten: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeWrittenDate: 2026-06-10T13:25:02.000Z,
+      lastAppliedWallTime: 2026-06-10T13:25:02.452Z,
+      lastDurableWallTime: 2026-06-10T13:25:02.452Z,
+      lastWrittenWallTime: 2026-06-10T13:25:02.452Z,
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: 'Could not find member to sync from',
+      electionTime: Timestamp({ t: 1781097902, i: 1 }),
+      electionDate: 2026-06-10T13:25:02.000Z,
+      configVersion: 1,
+      configTerm: 1,
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 1,
+      name: 'localhost:27018',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 23,
+      optime: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeDate: 2026-06-10T13:25:02.000Z,
+      optimeDurableDate: 2026-06-10T13:25:02.000Z,
+      optimeWrittenDate: 2026-06-10T13:25:02.000Z,
+      lastAppliedWallTime: 2026-06-10T13:25:02.452Z,
+      lastDurableWallTime: 2026-06-10T13:25:02.452Z,
+      lastWrittenWallTime: 2026-06-10T13:25:02.452Z,
+      lastHeartbeat: 2026-06-10T13:25:14.387Z,
+      lastHeartbeatRecv: 2026-06-10T13:25:13.389Z,
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27017',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 1
+    },
+    {
+      _id: 2,
+      name: 'localhost:27019',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 23,
+      optime: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1781097902, i: 17 }), t: Long('1') },
+      optimeDate: 2026-06-10T13:25:02.000Z,
+      optimeDurableDate: 2026-06-10T13:25:02.000Z,
+      optimeWrittenDate: 2026-06-10T13:25:02.000Z,
+      lastAppliedWallTime: 2026-06-10T13:25:02.452Z,
+      lastDurableWallTime: 2026-06-10T13:25:02.452Z,
+      lastWrittenWallTime: 2026-06-10T13:25:02.452Z,
+      lastHeartbeat: 2026-06-10T13:25:14.387Z,
+      lastHeartbeatRecv: 2026-06-10T13:25:13.388Z,
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27017',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 1
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1781097902, i: 17 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1781097902, i: 17 })
+}
+use college
+switched to db college
+
+db.students.insertOne({
+  name: "Yash",
+  course: "MongoDB"
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a2965ed5982ef8ea5fe451f')
+}
+rs.secondaryOk()
+DeprecationWarning: .setSecondaryOk() is deprecated. Use .setReadPref("primaryPreferred") instead
+Setting read preference from "primary" to "primaryPreferred"
+use college
+already on db college
+db.students.find()
+{
+  _id: ObjectId('6a2965ed5982ef8ea5fe451f'),
+  name: 'Yash',
+  course: 'MongoDB'
+}
+myReplSet [direct: primary] college
+
+
